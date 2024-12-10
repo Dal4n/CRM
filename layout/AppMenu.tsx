@@ -18,12 +18,14 @@ const AppMenu = () => {
         {
             label: 'UI Components',
             items: [
+                { label: 'Historico Ventas de Membresias', icon: 'pi pi-fw pi-calendar', to: '/components/historicoVentasMembresias' },
+                { label: 'Historico Compras', icon: 'pi pi-fw pi-calendar', to: '/components/historicoCompras' },
                 { label: 'Eventos', icon: 'pi pi-fw pi-calendar', to: '/components/evento' },
                 { label: 'Promociones', icon: 'pi pi-fw pi-ticket', to: '/components/promocion' },
                 { label: 'Clientes', icon: 'pi pi-fw pi-users', to: '/components/cliente' },
                 { label: 'Comentarios y/o sugerencias', icon: 'pi pi-fw pi-comments', to: '/components/feedback' },
                 { label: 'Proospectos', icon: 'pi pi-fw pi-book', to: '/components/ebook' },
-                { label: 'Ventas', icon: 'pi pi-fw pi-money-bill', to: '/components/venta' },
+                { label: 'Historico Ventas', icon: 'pi pi-fw pi-money-bill', to: '/components/venta' },
                 { label: 'Float Label', icon: 'pi pi-fw pi-bookmark', to: '/uikit/floatlabel' },
                 { label: 'Invalid State', icon: 'pi pi-fw pi-exclamation-circle', to: '/uikit/invalidstate' },
                 { label: 'Button', icon: 'pi pi-fw pi-mobile', to: '/uikit/button', class: 'rotated-icon' },
