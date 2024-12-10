@@ -18,6 +18,8 @@ const AppMenu = () => {
         {
             label: 'UI Components',
             items: [
+                { label: 'Historico Ventas de Membresias', icon: 'pi pi-fw pi-calendar', to: '/components/historicoVentasMembresias' },
+                { label: 'Historico Compras', icon: 'pi pi-fw pi-calendar', to: '/components/historicoCompras' },
                 { label: 'Eventos', icon: 'pi pi-fw pi-calendar', to: '/components/evento' },
                 { label: 'Promociones', icon: 'pi pi-fw pi-ticket', to: '/components/promocion' },
                 { label: 'Clientes', icon: 'pi pi-fw pi-users', to: '/components/cliente' },
