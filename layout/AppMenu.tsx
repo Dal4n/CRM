@@ -13,7 +13,10 @@ const AppMenu = () => {
     const model: AppMenuItem[] = [
         {
             label: 'Analitica',
-            items: [{ label: 'Dashboard', icon: 'pi pi-fw pi-home', to: '/' }]
+            items: [/* { label: '2', icon: 'pi pi-fw pi-home', to: '/' },
+                { label: 'Chart', icon: 'pi pi-fw pi-chart-bar', to: '/uikit/charts' }, */
+                { label: 'Dashboard', icon: 'pi pi-fw pi-chart-bar', to: '/components/analitica' },
+            ]
         },
         {
             label: 'Marketing',
