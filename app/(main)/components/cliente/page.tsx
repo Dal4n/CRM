@@ -51,21 +51,28 @@ const ClientesPage = () => {
     };
 
     return (
-        <Card className="p-mb-4">
-            <h5>Listado de Clientes</h5>
-            <div className="grid p-fluid">
+        <div className="card p-m-4">
+            <h5 className="text-start mb-4">Listado de Clientes</h5>
+            <div className="flex">
                 {clientes.map(cliente => (
-                    <div key={cliente.idCliente} className="col-12 md:col-4 lg:col-3 mb-4">
-                        <Card onClick={() => handleCardClick(cliente)} className="cursor-pointer">
-                            <div className="flex align-items-center">
-                                <i className="pi pi-user" style={{ fontSize: '1.3em', marginRight: '0.5em' }}></i>
-                                <strong>{cliente.persona.nombre + ' ' + cliente.persona.apellidoPaterno}</strong>
-                            </div>
+                    <div
+                    key={cliente.idCliente}
+                    className="col-12 md:col-4 lg:col-4 mb-3"
+                    onClick={() => handleCardClick(cliente)}
+                  >
+                    <div className="card p-3 shadow-lg hover:shadow-xl transition-shadow duration-200 cursor-pointer hoverable">
+              <div className="flex align-items-center mb-2">
+              <i
+                  className="pi pi-user mr-2"
+                  style={{ fontSize: "2rem", color: "lightseagreen " }}
+                ></i>
+                 <strong>{cliente.persona.nombre + ' ' + cliente.persona.apellidoPaterno}</strong>
+              </div>
                             <hr />
                             <p><strong>Ocupación:</strong> {cliente.ocupacion.nombre}</p>
                             <p><strong>Celular:</strong> {cliente.persona.telefono}</p>
-                        </Card>
                     </div>
+                  </div>
                 ))}
             </div>
 
@@ -75,7 +82,30 @@ const ClientesPage = () => {
                     <Button label="Cerrar" icon="pi pi-times" className="p-button-text" onClick={() => setShowModal(false)} />
                 </div>
             </Dialog>
-        </Card>
+
+            <style jsx>{`
+        .hoverable {
+          transition: transform 0.2s, box-shadow 0.2s;
+          cursor: pointer;
+          border: 1px solid lightseagreen  ;
+        }
+
+        .hoverable:hover {
+          transform: scale(1.05);
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .list-none {
+          list-style: none;
+        }
+
+        .grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 1.5rem;
+        }
+      `}</style>
+        </div>
     );
 };
 

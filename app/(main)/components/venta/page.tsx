@@ -37,60 +37,79 @@ const VentasPage = () => {
     };
 
     return (
-        <div className="p-card p-shadow-3 p-m-3">
-            <div className="p-card-header">
-                <h2>Ventas</h2>
-            </div>
-            <div className="p-card-body">
-                <div className="p-grid">
-                    {ventas.map((venta) => (
-                        <div key={venta.idVenta} className="p-col-12 p-md-6 p-lg-4">
-                            <div className="p-card p-shadow-2">
-                                <div className="p-card-header">
-                                    <h4 className='p-3'>Venta #{venta.idVenta}</h4>
-                                </div>
-                                <div className="p-card-body">
-                                    <p><strong>Cliente:</strong> {`${venta.cliente.persona.nombre} ${venta.cliente.persona.apellidoPaterno} ${venta.cliente.persona.apellidoMaterno}`}</p>
-                                    <p><strong>Fecha:</strong> {new Date(venta.fechaVenta).toLocaleDateString()}</p>
-                                    <Button
-                                        label="Ver Detalles"
-                                        className="p-button-outlined p-button-info"
-                                        onClick={() => showDetails(venta)}
-                                    />
-                                </div>
+        <div className="card p-m-4">
+            <h5 className="text-start mb-4">Ventas Realizadas</h5>
+            <div className="flex">
+                {ventas.map((venta) => (
+                    <div key={venta.idVenta}
+                        className="col-12 md:col-4 lg:col-4 mb-3"
+                        onClick={() => showDetails(venta)}>
+                        <div className="card p-3 shadow-lg hover:shadow-xl transition-shadow duration-200 cursor-pointer hoverable">
+                            <div className="flex align-items-center mb-2">
+                                <i
+                                    className="pi pi-fw pi-shopping-bag mr-2"
+                                    style={{ fontSize: "2rem", color: "green" }}
+                                ></i>
+                                <h5 className="m-0">Venta #{venta.idVenta}</h5>
                             </div>
+                            <p><strong>Cliente:</strong> {`${venta.cliente.persona.nombre} ${venta.cliente.persona.apellidoPaterno} ${venta.cliente.persona.apellidoMaterno}`}</p>
+                            <p><strong>Fecha:</strong> {new Date(venta.fechaVenta).toLocaleDateString()}</p>
                         </div>
-                    ))}
-                </div>
-
-                {/* Modal para mostrar detalles de la venta */}
-                <Dialog
-                    header={`Detalles de Venta #${selectedVenta?.idVenta}`}
-                    visible={isModalVisible}
-                    style={{ width: '50vw' }}
-                    onHide={hideDetails}
-                >
-                    {selectedVenta && (
-                        <div>
-                            <h4>Cliente</h4>
-                            <p><strong>Nombre:</strong> {`${selectedVenta.cliente.persona.nombre} ${selectedVenta.cliente.persona.apellidoPaterno} ${selectedVenta.cliente.persona.apellidoMaterno}`}</p>
-                            <p><strong>Email:</strong> {selectedVenta.cliente.persona.email}</p>
-
-                            <h4>Productos</h4>
-                            <ul>
-                                {selectedVenta.detallesVenta.map((detalle) => (
-                                    <li key={detalle.idDetalleVenta}>
-                                        {detalle.producto.nombre} - Cantidad: {detalle.cantidad}, Subtotal: ${detalle.subtotal}
-                                    </li>
-                                ))}
-                            </ul>
-
-                            <h4>Fecha</h4>
-                            <p>{new Date(selectedVenta.fechaVenta).toLocaleDateString()}</p>
-                        </div>
-                    )}
-                </Dialog>
+                    </div>
+                ))}
             </div>
+
+            {/* Modal para mostrar detalles de la venta */}
+            <Dialog
+                header={`Detalles de Venta #${selectedVenta?.idVenta}`}
+                visible={isModalVisible}
+                style={{ width: '50vw' }}
+                onHide={hideDetails}
+            >
+                {selectedVenta && (
+                    <div>
+                        <h4>Cliente</h4>
+                        <p><strong>Nombre:</strong> {`${selectedVenta.cliente.persona.nombre} ${selectedVenta.cliente.persona.apellidoPaterno} ${selectedVenta.cliente.persona.apellidoMaterno}`}</p>
+                        <p><strong>Email:</strong> {selectedVenta.cliente.persona.email}</p>
+                        <p><strong>Teléfono:</strong> {selectedVenta.cliente.persona.telefono}</p>
+
+                        <h4>Productos</h4>
+                        <ul>
+                            {selectedVenta.detallesVenta.map((detalle) => (
+                                <li key={detalle.idDetalleVenta}>
+                                    {detalle.producto.nombre} - Cantidad: {detalle.cantidad}, Subtotal: ${detalle.subtotal}
+                                </li>
+                            ))}
+                        </ul>
+
+                        <h4>Fecha</h4>
+                        <p>{new Date(selectedVenta.fechaVenta).toLocaleDateString()}</p>
+                    </div>
+                )}
+            </Dialog>
+
+            <style jsx>{`
+        .hoverable {
+          transition: transform 0.2s, box-shadow 0.2s;
+          cursor: pointer;
+          border: 1px solid green;
+        }
+
+        .hoverable:hover {
+          transform: scale(1.05);
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .list-none {
+          list-style: none;
+        }
+
+        .grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 1.5rem;
+        }
+      `}</style>
         </div>
     );
 };
