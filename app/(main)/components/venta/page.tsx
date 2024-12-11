@@ -39,10 +39,10 @@ const VentasPage = () => {
     return (
         <div className="card p-m-4">
             <h5 className="text-start mb-4">Ventas Realizadas</h5>
-            <div className="flex">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {ventas.map((venta) => (
                     <div key={venta.idVenta}
-                        className="col-12 md:col-4 lg:col-4 mb-3"
+                        className="col-12 mb-3"
                         onClick={() => showDetails(venta)}>
                         <div className="card p-3 shadow-lg hover:shadow-xl transition-shadow duration-200 cursor-pointer hoverable">
                             <div className="flex align-items-center mb-2">

@@ -35,10 +35,10 @@ const ComprasPage = () => {
   return (
     <div className="card p-m-4">
       <h5 className="text-start mb-4">Ventas de Membresías</h5>
-      <div className="flex">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {compras.map((compra) => (
           <div
-            className="col-12 md:col-4 lg:col-4 mb-3"
+           className="col-12 mb-3"
             key={compra.id}
             onClick={() => openModal(compra)}
           >
