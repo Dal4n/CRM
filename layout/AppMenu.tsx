@@ -37,7 +37,7 @@ const AppMenu = () => {
             ]
         },
         {
-            label: 'Ventas',
+            label: 'Finanzas',
             items: [
                 { label: 'Ventas de Productos', icon: 'pi pi-fw pi-money-bill', to: '/components/venta' },
                 { label: 'Compras de Productos', icon: 'pi pi-fw pi-shopping-cart', to: '/components/historicoCompras' },

@@ -59,34 +59,57 @@ const VentasPage = () => {
                 ))}
             </div>
 
-            {/* Modal para mostrar detalles de la venta */}
             <Dialog
                 header={`Detalles de Venta #${selectedVenta?.idVenta}`}
                 visible={isModalVisible}
-                style={{ width: '50vw' }}
+                style={{ width: "50vw" }}
                 onHide={hideDetails}
+                className="p-dialog-rounded p-dialog-shadow"
             >
                 {selectedVenta && (
-                    <div>
-                        <h4>Cliente</h4>
-                        <p><strong>Nombre:</strong> {`${selectedVenta.cliente.persona.nombre} ${selectedVenta.cliente.persona.apellidoPaterno} ${selectedVenta.cliente.persona.apellidoMaterno}`}</p>
-                        <p><strong>Email:</strong> {selectedVenta.cliente.persona.email}</p>
-                        <p><strong>Teléfono:</strong> {selectedVenta.cliente.persona.telefono}</p>
+                    <div style={{ padding: "1rem" }}>
+                        {/* Sección de Cliente */}
+                        <div style={{ marginBottom: "1rem" }}>
+                            <h4 style={{ marginBottom: "0.5rem", borderBottom: "1px solid #ccc", paddingBottom: "0.5rem" }}>
+                                <i className="pi pi-user" style={{ marginRight: "0.5rem" }}></i>Cliente
+                            </h4>
+                            <p>
+                                <strong>Nombre:</strong> {`${selectedVenta.cliente.persona.nombre} ${selectedVenta.cliente.persona.apellidoPaterno} ${selectedVenta.cliente.persona.apellidoMaterno}`}
+                            </p>
+                            <p>
+                                <strong>Email:</strong> {selectedVenta.cliente.persona.email}
+                            </p>
+                            <p>
+                                <strong>Teléfono:</strong> {selectedVenta.cliente.persona.telefono}
+                            </p>
+                        </div>
 
-                        <h4>Productos</h4>
-                        <ul>
-                            {selectedVenta.detallesVenta.map((detalle) => (
-                                <li key={detalle.idDetalleVenta}>
-                                    {detalle.producto.nombre} - Cantidad: {detalle.cantidad}, Subtotal: ${detalle.subtotal}
-                                </li>
-                            ))}
-                        </ul>
+                        {/* Sección de Productos */}
+                        <div style={{ marginBottom: "1rem" }}>
+                            <h4 style={{ marginBottom: "0.5rem", borderBottom: "1px solid #ccc", paddingBottom: "0.5rem" }}>
+                                <i className="pi pi-shopping-cart" style={{ marginRight: "0.5rem" }}></i>Productos
+                            </h4>
+                            <ul style={{ paddingLeft: "1rem", margin: 0 }}>
+                                {selectedVenta.detallesVenta.map((detalle) => (
+                                    <li key={detalle.idDetalleVenta} style={{ marginBottom: "0.5rem" }}>
+                                        <strong>{detalle.producto.nombre}</strong> - Cantidad: {detalle.cantidad}, Subtotal:{" "}
+                                        <span style={{ color: "#28a745", fontWeight: "bold" }}>${detalle.subtotal}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
 
-                        <h4>Fecha</h4>
-                        <p>{new Date(selectedVenta.fechaVenta).toLocaleDateString()}</p>
+                        {/* Sección de Fecha */}
+                        <div>
+                            <h4 style={{ marginBottom: "0.5rem", borderBottom: "1px solid #ccc", paddingBottom: "0.5rem" }}>
+                                <i className="pi pi-calendar" style={{ marginRight: "0.5rem" }}></i>Fecha Venta
+                            </h4>
+                            <p>{new Date(selectedVenta.fechaVenta).toLocaleDateString()}</p>
+                        </div>
                     </div>
                 )}
             </Dialog>
+
 
             <style jsx>{`
         .hoverable {
