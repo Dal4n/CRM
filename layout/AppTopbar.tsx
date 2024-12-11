@@ -5,18 +5,30 @@ import { classNames } from 'primereact/utils';
 import React, { forwardRef, useContext, useImperativeHandle, useRef } from 'react';
 import { AppTopbarRef } from '@/types';
 import { LayoutContext } from './context/layoutcontext';
+import { Dropdown } from 'primereact/dropdown';
+import { useRouter } from 'next/navigation'; // Importa useRouter
+import Swal from 'sweetalert2';
 
 const AppTopbar = forwardRef<AppTopbarRef>((props, ref) => {
     const { layoutConfig, layoutState, onMenuToggle, showProfileSidebar } = useContext(LayoutContext);
     const menubuttonRef = useRef(null);
     const topbarmenuRef = useRef(null);
     const topbarmenubuttonRef = useRef(null);
+    const router = useRouter(); // Instancia del router
 
     useImperativeHandle(ref, () => ({
         menubutton: menubuttonRef.current,
         topbarmenu: topbarmenuRef.current,
         topbarmenubutton: topbarmenubuttonRef.current
     }));
+
+    // Método de logout
+    const handleLogout = () => {
+        localStorage.removeItem('authToken'); // Elimina el token de autenticación
+        localStorage.removeItem('userinfo'); // Elimina información del usuario
+        router.push('/auth/login'); // Redirige al usuario a la página de login
+        Swal.fire('Logout Exitoso', 'Has cerrado sesión correctamente.', 'success');
+    };
 
     return (
         <div className="layout-topbar">
@@ -29,26 +41,18 @@ const AppTopbar = forwardRef<AppTopbarRef>((props, ref) => {
                 <i className="pi pi-bars" />
             </button>
 
-            {/* <button ref={topbarmenubuttonRef} type="button" className="p-link layout-topbar-menu-button layout-topbar-button" onClick={showProfileSidebar}>
+             <button ref={topbarmenubuttonRef} type="button" className="p-link layout-topbar-menu-button layout-topbar-button" onClick={showProfileSidebar}>
                 <i className="pi pi-ellipsis-v" />
             </button>
 
             <div ref={topbarmenuRef} className={classNames('layout-topbar-menu', { 'layout-topbar-menu-mobile-active': layoutState.profileSidebarVisible })}>
-                <button type="button" className="p-link layout-topbar-button">
-                    <i className="pi pi-calendar"></i>
-                    <span>Calendar</span>
+
+                {/* Botón de Logout */}
+                <button type="button" className="p-link layout-topbar-button" onClick={handleLogout}>
+                    <i className="pi pi-sign-out"></i>
+                    <span>Logout</span>
                 </button>
-                <button type="button" className="p-link layout-topbar-button">
-                    <i className="pi pi-user"></i>
-                    <span>Profile</span>
-                </button>
-                <Link href="/documentation">
-                    <button type="button" className="p-link layout-topbar-button">
-                        <i className="pi pi-cog"></i>
-                        <span>Settings</span>
-                    </button>
-                </Link>
-            </div> */}
+            </div>
         </div>
     );
 });
