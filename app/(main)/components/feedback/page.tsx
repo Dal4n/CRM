@@ -26,15 +26,15 @@ const ComentariosPage = () => {
         <Card className="card p-m-4">
             <h5>Comentarios y/o sugerencias</h5>
             < div className="col-12" >
-                <div className="grid">
+                <div className="grid grid-cols-2 gap-1 md:grid-cols-1">
                     {comentarios.map((comentario) => (
-                        <div key={comentario.id} className="col-12 mb-3">
+                        <div key={comentario.id} className="col-12 mb-2">
                             <div className="p-card hoverable p-3">
                                 <h4 style={{ color: 'goldenrod ' }}>{comentario.nombre}</h4>
                                 {/* <Rating value={comentario.rating} readOnly className="mb-2" style={{ color: 'gold' }} /> */}
                                 <div className="stars">
                                     {Array.from({ length: 5 }, (_, index) => (
-                                        <span key={index} style={{color: index < comentario.rating ? 'gold' : 'gray' }}>
+                                        <span key={index} style={{ color: index < comentario.rating ? 'gold' : 'gray' }}>
                                             &#9733;
                                         </span>
                                     ))}
